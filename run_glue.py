@@ -363,7 +363,7 @@ def train(args, train_dataset, model, tokenizer):
         output_dir = args.output_dir  # ./model/RTE/teacher
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        model_to_save = best_model['model'].module if hasattr(model, 'module') else best_model['model']  # Take care of distributed/parallel training
+        model_to_save = best_model['model'].module if hasattr(best_model['model'], 'module') else best_model['model']  # Take care of distributed/parallel training
         model_to_save.save_pretrained(output_dir)
         torch.save(args, os.path.join(output_dir, 'training_args.bin'))
         tokenizer.save_pretrained(output_dir)
